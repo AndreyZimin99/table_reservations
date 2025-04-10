@@ -23,22 +23,8 @@ async def create_table(
     return await crud.create_table(session=session, table_in=table_in)
 
 
-# @router.get('/{table_id}/', response_model=Table)
-# async def get_table(
-#     table_id: int,
-#     session: AsyncSession = Depends(db_helper.scoped_session_dependency)
-# ):
-#     table = await crud.get_table(session=session, table_id=table_id)
-#     if table:
-#         return table
-#     raise HTTPException(
-#         status_code=status.HTTP_404_NOT_FOUND,
-#         detail=f'Table {table_id} not found'
-#     )
-
-
 @router.delete('/{table_id}/', status_code=status.HTTP_204_NO_CONTENT)
-async def delete_product(
+async def delete_reservation(
     table_id: int,
     session: AsyncSession = Depends(db_helper.scoped_session_dependency)
 ) -> None:
@@ -48,5 +34,5 @@ async def delete_product(
     else:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f'Table {table_id} not found'
+            detail=f'Стол {table_id} не найден'
         )

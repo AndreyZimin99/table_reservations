@@ -1,9 +1,9 @@
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, PositiveInt
 
 
 class TableBase(BaseModel):
     name: str
-    seats: int
+    seats: PositiveInt
     location: str
 
 
