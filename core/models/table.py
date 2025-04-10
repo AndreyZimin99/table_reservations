@@ -9,6 +9,6 @@ from .base import Base
 class Table(Base):
     __tablename__ = 'tables'
 
-    name: Mapped[str]
+    name: Mapped[str] = mapped_column(unique=True)
     seats: Mapped[int]
     location: Mapped[str]
