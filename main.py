@@ -1,30 +1,17 @@
-from typing import Annotated
-from fastapi import FastAPI, Depends
-from pydantic import BaseModel
 import uvicorn
-
-from core.models import Base, db_helper
-
 from contextlib import asynccontextmanager
+from fastapi import FastAPI
 
-from items_views import router as items_router
+from api_v1 import router as router_v1
+from core.config import settings
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    async with db_helper.engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
     yield
 
 app = FastAPI(lifespan=lifespan)
-app.include_router(items_router)
-
-
-@app.get('/')
-def hello_index():
-    return {
-        'message': 'Hello!',
-    }
+app.include_router(router=router_v1, prefix=settings.api_v1_prefix)
 
 
 if __name__ == '__main__':
