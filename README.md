@@ -17,6 +17,8 @@
 1. **Клонируйте репозиторий:**
    ```
    git clone https://github.com/AndreyZimin99/table_reservations.git
+   ```
+   ```
    cd table_reservations
    ```
 
