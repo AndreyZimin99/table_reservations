@@ -42,7 +42,7 @@
    POSTGRES_DB=postgres
    POSTGRES_USER=postgres_user
    POSTGRES_PASSWORD=postgres
-   DB_HOST=localhost
+   DB_HOST=db
    DB_PORT=5432
    ```
    
