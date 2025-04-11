@@ -5,6 +5,7 @@ from . import crud
 from core.models import db_helper
 from .schemas import Reservation, ReservationCreate
 
+
 router = APIRouter(tags=['Reservation'])
 
 
@@ -12,7 +13,8 @@ router = APIRouter(tags=['Reservation'])
 async def get_reservations(
     session: AsyncSession = Depends(db_helper.scoped_session_dependency)
 ):
-    return await crud.get_reservations(session=session)
+    result = await crud.get_reservations(session=session)
+    return result
 
 
 @router.post('/',  response_model=Reservation)

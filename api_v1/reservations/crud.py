@@ -1,7 +1,6 @@
 from datetime import datetime, timezone
 
 from fastapi import HTTPException, status
-
 from sqlalchemy import select
 from sqlalchemy.engine import Result
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -11,7 +10,7 @@ from .schemas import ReservationCreate
 
 
 async def get_reservations(session: AsyncSession) -> list[Reservation]:
-    stmt = select(Reservation).order_by(Reservation.id)
+    stmt = select(Reservation).order_by(Reservation.reservation_time)
     result: Result = await session.execute(stmt)
     reservations = result.scalars().all()
     return list(reservations)
@@ -36,12 +35,12 @@ async def create_reservation(
         )
     existing_reservation = await session.execute(
         select(Reservation).filter(
-            (Reservation.table_id == reservation.table_id) &
-            (Reservation.reservation_time == reservation.reservation_time)
+            Reservation.table_id == reservation.table_id,
+            Reservation.reservation_time == reservation.reservation_time
         )
     )
 
-    if existing_reservation.scalars().first() is not None:
+    if existing_reservation:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=(
