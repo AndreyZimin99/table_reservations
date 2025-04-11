@@ -12,4 +12,4 @@ RUN pip install -r requirements.txt --no-cache-dir
 COPY . .
 
 
-CMD ["gunicorn", "-w", "10", "-k", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8000", "main:app"]
+CMD ["gunicorn", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8000", "main:app"]

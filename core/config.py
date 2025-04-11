@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     POSTGRES_PORT: int = 5432
     POSTGRES_DB: str = 'postgres'
     POSTGRES_USER: str = 'user'
-    POSTGRES_PASSWORD: str = '1234'
+    POSTGRES_PASSWORD: str = '1111'
 
     @property
     def DATABASE_URL(self):
@@ -18,7 +18,7 @@ class Settings(BaseSettings):
             f'{self.POSTGRES_PORT}/{self.POSTGRES_DB}'
         )
 
-    # model_config = SettingsConfigDict(env_file='.env')
+    model_config = SettingsConfigDict(env_file='.env')
 
 
 settings = Settings()
